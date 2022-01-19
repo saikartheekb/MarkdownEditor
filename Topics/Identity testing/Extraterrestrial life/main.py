@@ -1,8 +1,0 @@
-# The parental gene sequences are stored here
-one_ancestor = input()
-other_ancestor = input()
-
-# Calculate the identity of a new alien here
-new_alien = (id(one_ancestor) + id(other_ancestor)) / 2
-
-# print(id(one_ancestor))
