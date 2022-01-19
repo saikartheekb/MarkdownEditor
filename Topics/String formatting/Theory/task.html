@@ -1,0 +1,79 @@
+<h2>String formatting</h2>
+<html>
+ <head></head>
+ <body>
+  <p>There are certain situations when you want to make your strings kind of "dynamic", i.e. make them change depending on the value of a variable or expression. For example, you want to prompt the user for their name and print the greeting to them with the name they entered. But how can you embed a variable into a string? If you do it in the most intuitive way, you'll be disappointed:</p> 
+  <pre><code class="language-python">a = input()
+print('Hello, a')</code></pre> 
+  <p>The output will be:</p> 
+  <pre><code class="language-python">Hello, a</code></pre> 
+  <p>Luckily, Python offers a large variety of methods to format the output the way you want and we'll concentrate on the main two:</p> 
+  <ul> 
+   <li>Formatted string literals</li> 
+   <li>The <code class="language-python">str.format()</code> method</li> 
+  </ul> 
+  <p>Earlier <strong>the % operator </strong>was in use. This built-in operator was derived from C-language and was used in some situations in the following way:</p> 
+  <p style="text-align: center;"><strong>string % value</strong></p> 
+  <p>Thus, the variable to the right of <code class="language-python">%</code> was included in the string to the left of it. If we'd wanted to divide 11 by 3, the <code class="language-python">/</code> operator would have returned a float number with a lot of decimal places.</p> 
+  <pre><code class="language-python">print(11 / 3)  # 3.6666666666666665</code></pre> 
+  <p>With <code class="language-python">%</code> character, we could control the number of decimal places, for example, reduce their number to 3 or 2:</p> 
+  <pre><code class="language-python">print('%.3f' % (11/3))  # 3.667
+print('%.2f' % (11/3))  # 3.67</code></pre> 
+  <p>For every operation, you had to know plenty of specifiers, length modifiers and conversion types. A huge variety of extra operators led to some common errors. That's why more modern and easy to use operators were introduced. Progress never stops, you know!</p> 
+  <p>Formatting your strings also makes your code look more readable and easily editable.</p> 
+  <h5 style="text-align: center;">The str. format() method</h5> 
+  <p>The operation of the method is already described in its name: in the <strong>string part</strong>, we introduce curly braces as placeholders for variables enlisted in the <strong>format part</strong>:</p> 
+  <pre><code class="language-python">print('Mix {}, {} and a {} to make an ideal omelet.'.format('2 eggs', '30 g of milk', 'pinch of salt'))</code></pre> 
+  <p>The expressions are put instead of braces in the order they were mentioned:</p> 
+  <pre><code class="language-no-highlight">Mix 2 eggs, 30 g of milk and a pinch of salt to make an ideal omelet.</code></pre> 
+  <p>You can use the same variable in one string more than once if it's necessary. Furthermore, you can address the objects by referring to their <strong>positions</strong> in curly braces (as usual, <em>the numbering starts from zero</em>). Attention: the order you choose can be very important. The following two codes:</p> 
+  <pre><code class="language-python">print('{0} in the {1} by Frank Sinatra'.format('Strangers', 'Night'))</code></pre> 
+  <p>and</p> 
+  <pre><code class="language-python">print('{1} in the {0} by Frank Sinatra'.format('Strangers', 'Night'))</code></pre> 
+  <p>will have different outputs:</p> 
+  <pre><code class="language-no-highlight">Strangers in the Night by Frank Sinatra</code></pre> 
+  <pre><code class="language-no-highlight">Night in the Strangers by Frank Sinatra</code></pre> 
+  <p>The second output sounds really weird, doesn't it?</p> 
+  <p>If you've mentioned more variables than needed in the format part, the extra ones will just be ignored.</p> 
+  <p>We can also use keywords to make such strings more readable. Don't forget that you can easily break the lines! For example:</p> 
+  <pre><code class="language-python">print('The {film} at {theatre} was {adjective}!'.format(film='Lord of the Rings',
+                                                        adjective='incredible',
+                                                        theatre='BFI IMAX'))</code></pre> 
+  <p>Note that you can also mix the order as you want if you use keywords. Here's the formatted string:</p> 
+  <pre><code class="language-no-highlight">The Lord of the Rings at BFI IMAX was incredible!</code></pre> 
+  <p>Also, you can combine both positional and keyword arguments:</p> 
+  <pre><code class="language-python">print('The {0} was {adjective}!'.format('Lord of the Rings', adjective='incredible'))
+# The Lord of the Rings was incredible!</code></pre> 
+  <p>Keep tabs on the order of your arguments, though:</p> 
+  <pre><code class="language-python">print('The {0} was {adjective}!'.format(adjective='incredible', 'Lord of the Rings'))
+# SyntaxError: positional argument follows keyword argument</code></pre> 
+  <p>The last code snippet resulted in <code class="language-python">SyntaxError</code>, since positional arguments are to be mentioned first.</p> 
+  <p></p>
+  <div class="alert alert-warning">
+   Remember as a Python rule that keyword arguments are always written 
+   <strong>after</strong> positional, or non-keyword, arguments.
+  </div>
+  <p></p> 
+  <h5 style="text-align: center;">Formatted string literals</h5> 
+  <p><strong>Formatted string literals</strong> (or, simply, <strong>f-strings</strong>) are used to embed the values of expressions inside string literals. This way is supposed to be the easiest one: you only need to put <strong>f</strong> before the string and put the variables you want to embed into the string in curly braces. They are also the newest feature among all string formatting methods in Python.</p> 
+  <pre><code class="language-python">name = 'Elizabeth II'
+title = 'Queen of the United Kingdom and the other Commonwealth realms'
+reign = 'the longest-lived and longest-reigning British monarch'
+f'{name}, the {title}, is {reign}.'</code></pre> 
+  <p>If you print this short string, you'll see an output that is five times longer than its representation in code:</p> 
+  <pre><code class="language-no-highlight">Elizabeth II, the Queen of the United Kingdom and the other Commonwealth realms, is the longest-lived and longest-reigning British monarch.</code></pre> 
+  <p>You can also use different formatting specifications with f-literals, for example rounding decimals would look like this:</p> 
+  <pre><code class="language-python">hundred_percent_number = 1823
+needed_percent = 16
+needed_percent_number = hundred_percent_number * needed_percent / 100
+
+print(f'{needed_percent}% from {hundred_percent_number} is {needed_percent_number}')
+# 16% from 1823 is 291.68
+
+print(f'Rounding {needed_percent_number} to 1 decimal place is {needed_percent_number:.1f}')
+# Rounding 291.68 to 1 decimal place is 291.7</code></pre> 
+  <p>You can read more about Format Specification Mini-Language in Python in the <a target="_blank" href="https://docs.python.org/3.6/library/string.html#format-specification-mini-language" rel="noopener noreferrer nofollow">official documentation</a>.</p> 
+  <h5>Summary</h5> 
+  <p>Thus, in this topic, we've learned several ways of string formatting: by using % operator, str.format() method, and f-strings. Maybe now you think that these methods are not important and overrated, but in practice, they are quite useful and give you an opportunity to make your code look fancy and readable.</p>
+ </body>
+</html>

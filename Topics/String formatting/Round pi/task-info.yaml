@@ -1,0 +1,11 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: |-
+    pi = 3.141592653589793
+    # put your python code here
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/6900#comment
+status: Solved
+record: -1
